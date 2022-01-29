@@ -20,6 +20,10 @@ You can find the exact same code of the following chapters in the example INO fi
 1. Get a parameter of a command (getResponseValue)
 2. Check if the command has a certain parameter value (hasResponseValue), and can always be used instead of the get[] version.
 
+NOTE:
+- parameter position are identified by 0,1,2,3, ... etc. with 0 being the first parameter.
+- text body lines are identified by -1,-2,-3,... etc. with -1 being the first body line.
+
 ![simple](https://user-images.githubusercontent.com/98483683/151663443-f6113f71-6c17-44b6-b0ee-9647e77bbf96.png)
 
 *Each function call matches a color, found values and positions searched on are underlined with this color*
