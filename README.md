@@ -30,7 +30,7 @@ NOTE:
 
 ### Two parameters
 1. Get a parameter of a command and use an extra search criteria on another parameter or text body line
-2. Same but use a list of values as the extra search criteria.
+2. Same but use a list of values as the extra search criteria. There will be a match if the response value matches ANY of the values in the list.
 3. if needed use the has[] version to check for existence of 2 values and return a boolean.
 
 ![addiotionallist](https://user-images.githubusercontent.com/98483683/151663446-c3969754-5871-4fe8-a9ce-3dafa34165df.png)
