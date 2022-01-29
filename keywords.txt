@@ -6,27 +6,26 @@
 # Datatypes (KEYWORD1)
 #######################################
 ATParse	KEYWORD1
-protected	KEYWORD1
-
+public	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
-bool getResponseValue					KEYWORD2
-bool hasResponseValue					KEYWORD2
-bool getResponseValueNoListFilter		KEYWORD2
-bool hasResponseValueNoListFilter		KEYWORD2
-char* split	KEYWORD2
-char* strtok_r_strdelim	KEYWORD2
-char* strstr_quoted 	KEYWORD2
-char* strchr_quoted 	KEYWORD2
-char* cleanValue	KEYWORD2
-int strcicmp	KEYWORD2
-char *ltrim	KEYWORD2
-char *rtrim	KEYWORD2
-char *trim	KEYWORD2
-void sortar3	KEYWORD2
-void swapar	KEYWORD2
+getResponseValue	KEYWORD2
+hasResponseValue	KEYWORD2
+getResponseValueNoListFilter	KEYWORD2
+hasResponseValueNoListFilter	KEYWORD2
+split	KEYWORD2
+strtok_r_strdelim	KEYWORD2
+strstr_quoted	KEYWORD2
+strchr_quoted	KEYWORD2
+cleanValue	KEYWORD2
+strcicmp	KEYWORD2
+ltrim	KEYWORD2
+rtrim	KEYWORD2
+trim	KEYWORD2
+sortar3	KEYWORD2
+swapar	KEYWORD2
 
 
 ######################################
