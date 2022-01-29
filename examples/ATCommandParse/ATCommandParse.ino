@@ -144,6 +144,18 @@ void setup() {
   //same but no match because its a case sensitive match
   bvalue = ATParse.hasResponseValue(response, "SCAN", 5, "LAPTOP 22A", 2, filterlist2, LEN2D(filterlist2), 0, "2a", true);
   printResultandResetTestB(bvalue);                                                                          //^lower case!
+
+  /************************* PARSE MULTIPLE COMMANDS BY LOOPING ****************************************/
+  
+  char* responsepos = response;
+  int pos = 0;
+  while (pos <= sizeof(response)) {
+    int pos = ATParse.getResponseValue(responsepos, "CMGL", 4, &value, true);
+    if (pos > 0) {
+      printResultandResetTest(value);
+      responsepos = responsepos + pos;
+    }
+  }
 }
 
 void loop() {

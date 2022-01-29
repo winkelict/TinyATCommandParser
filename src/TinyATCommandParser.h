@@ -85,9 +85,9 @@ public:
 	 */
 
 	//pos = INT_MIN: get all values, not the [pos]th position in the comma seperated list
-	static bool getResponseValue				(char* response, char* atcommand, int pos, char** returnvalue, bool firstMatch		, int optFilterListPos = INT_MIN, char (*optFilterList)[AT_RESPONSE_MAX_FILTERLIST_STRINGLENGTH] = NULL, byte optFilterListLen = INT_MIN, int optFilterPos = INT_MIN, char* optFilter = NULL, bool optFilterCaseSensitive = false);
+	static unsigned int getResponseValue				(char* response, char* atcommand, int pos, char** returnvalue, bool firstMatch		, int optFilterListPos = INT_MIN, char (*optFilterList)[AT_RESPONSE_MAX_FILTERLIST_STRINGLENGTH] = NULL, byte optFilterListLen = INT_MIN, int optFilterPos = INT_MIN, char* optFilter = NULL, bool optFilterCaseSensitive = false);
 	static bool hasResponseValue				(char* response, char* atcommand, int pos, char* value							, int optFilterListPos = INT_MIN, char (*optFilterList)[AT_RESPONSE_MAX_FILTERLIST_STRINGLENGTH] = NULL, byte optFilterListLen = INT_MIN, int optFilterPos = INT_MIN, char* optFilter = NULL, bool optFilterCaseSensitive = false);
-	static bool getResponseValueNoListFilter	(char* response, char* atcommand, int pos, char** returnvalue, bool firstMatch		, int optFilterPos = INT_MIN, char* optFilter = NULL, bool optFilterCaseSensitive = false);
+	static unsigned int getResponseValueNoListFilter	(char* response, char* atcommand, int pos, char** returnvalue, bool firstMatch		, int optFilterPos = INT_MIN, char* optFilter = NULL, bool optFilterCaseSensitive = false);
 	static bool hasResponseValueNoListFilter	(char* response, char* atcommand, int pos, char* value							, int optFilterPos = INT_MIN, char* optFilter = NULL, bool optFilterCaseSensitive = false);
 
 
@@ -114,7 +114,7 @@ public:
 
 
 protected:
-	static bool parse(char* response, char* atcommand, int pos, char** retvalue, bool firstMatch, char* filter, int optFilterListPos, char (*optFilterList)[AT_RESPONSE_MAX_FILTERLIST_STRINGLENGTH], byte optFilterListLen, int optFilterPos, char* optFilter, bool optFilterCaseSensitive);
+	static unsigned int parse(char* response, char* atcommand, int pos, char** retvalue, bool firstMatch, char* filter, int optFilterListPos, char (*optFilterList)[AT_RESPONSE_MAX_FILTERLIST_STRINGLENGTH], byte optFilterListLen, int optFilterPos, char* optFilter, bool optFilterCaseSensitive);
 
 private:
 #ifdef TINYATCOMMANDPARSE_DEBUG_ASSERTIONS

@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 TinyATCommandParser ATParse;
 
-bool TinyATCommandParser::getResponseValue(char* response, char* atcommand, int pos, char** returnvalue, bool firstMatch, int optFilterListPos, char (*optFilterList)[AT_RESPONSE_MAX_FILTERLIST_STRINGLENGTH], byte optFilterListLen, int optFilterPos, char* optFilter, bool optFilterCaseSensitive) {
+unsigned int TinyATCommandParser::getResponseValue(char* response, char* atcommand, int pos, char** returnvalue, bool firstMatch, int optFilterListPos, char (*optFilterList)[AT_RESPONSE_MAX_FILTERLIST_STRINGLENGTH], byte optFilterListLen, int optFilterPos, char* optFilter, bool optFilterCaseSensitive) {
 	return parse(response, atcommand, pos, returnvalue, firstMatch, NULL		, optFilterListPos, optFilterList, optFilterListLen			, optFilterPos, optFilter, optFilterCaseSensitive);
 }
 
@@ -36,7 +36,7 @@ bool TinyATCommandParser::hasResponseValue(char* response, char* atcommand, int 
 }
 
 
-bool TinyATCommandParser::getResponseValueNoListFilter(char* response, char* atcommand, int pos, char** returnvalue, bool firstMatch		, int optFilterPos, char* optFilter, bool optFilterCaseSensitive) {
+unsigned int TinyATCommandParser::getResponseValueNoListFilter(char* response, char* atcommand, int pos, char** returnvalue, bool firstMatch		, int optFilterPos, char* optFilter, bool optFilterCaseSensitive) {
 	return parse(response, atcommand, pos, returnvalue, firstMatch, NULL		, INT_MIN, NULL, INT_MIN									, optFilterPos, optFilter, optFilterCaseSensitive);
 }
 
@@ -51,7 +51,7 @@ bool TinyATCommandParser::hasResponseValueNoListFilter(char* response, char* atc
 //return 0 if not found, otherwise the next position in data with which this function can be called again (data+return = new pointer) without reparsing what was already parst (can use first=true, and get all values for example)
 //TODO: possible optimization: give split a list of pos and filters and let it match them all (filterlist would be hard then)
 // char (*optFilterList)[AT_RESPONSE_MAX_FILTERLIST_STRINGLENGTH]
-bool TinyATCommandParser::parse(char* response, char* atcommand, int pos, char** retvalue, bool firstMatch, char* filter, int optFilterListPos, char (*optFilterList)[AT_RESPONSE_MAX_FILTERLIST_STRINGLENGTH], byte optFilterListLen, int optFilterPos, char* optFilter, bool optFilterCaseSensitive)
+unsigned int TinyATCommandParser::parse(char* response, char* atcommand, int pos, char** retvalue, bool firstMatch, char* filter, int optFilterListPos, char (*optFilterList)[AT_RESPONSE_MAX_FILTERLIST_STRINGLENGTH], byte optFilterListLen, int optFilterPos, char* optFilter, bool optFilterCaseSensitive)
 //replytocommand     //param1 (smscommand param, or just value(signal quality)    //callerid or mac list (response is uniq)  //smscommand (list is response)
 {
 	//so i dont have to comment it out in the library
@@ -114,7 +114,7 @@ bool TinyATCommandParser::parse(char* response, char* atcommand, int pos, char**
 
 	while ( responseline != NULL )
 	{
-		nextdatapos = nextdatapos + strlen(responseline) + LEN2D(AT_RESPONSE_DELIM);
+		nextdatapos = nextdatapos + strlen(responseline) + LEN2D(AT_RESPONSE_DELIM)-1;
 
 		if (i > 0)
 			responseline = strtok_r_strdelim(NULL, AT_RESPONSE_DELIM, &saveptr);
