@@ -29,7 +29,7 @@ NOTE:
 *Each function call matches a color, found values and positions searched on are underlined with this color*
 
 ### Two parameters
-1. Get a parameter of a command and use an extra search criteria on another parameter or text body line
+1. Get a parameter of a command and use an extra search criteria on another parameter or text body line, in this case getValueNoListFilter has to be used.
 2. Same but use a list of values as the extra search criteria. There will be a match if the response value matches ANY of the values in the list.
 3. if needed use the has[] version to check for existence of 2 values and return a boolean.
 
@@ -58,6 +58,13 @@ This way multiple of the same commands can be parsed in a row, for example all m
 	    responsepos = responsepos + pos;
 	  }
 	}
+
+The result when using the response text of the chapters above will be:
+
+	
+	Result nr 15 : 22/01/02,20:14:54+08
+	Result nr 16 : 22/01/02,20:16:11+08
+	Result nr 17 : 22/01/02,20:17:57+08
 
 ### Customizing behavior of 1st, 2nd and 3rd parameter search.
 
