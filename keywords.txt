@@ -1,0 +1,34 @@
+#######################################
+# Syntax Coloring Map
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+ATParse	KEYWORD1
+protected	KEYWORD1
+
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+bool getResponseValue					KEYWORD2
+bool hasResponseValue					KEYWORD2
+bool getResponseValueNoListFilter		KEYWORD2
+bool hasResponseValueNoListFilter		KEYWORD2
+char* split	KEYWORD2
+char* strtok_r_strdelim	KEYWORD2
+char* strstr_quoted 	KEYWORD2
+char* strchr_quoted 	KEYWORD2
+char* cleanValue	KEYWORD2
+int strcicmp	KEYWORD2
+char *ltrim	KEYWORD2
+char *rtrim	KEYWORD2
+char *trim	KEYWORD2
+void sortar3	KEYWORD2
+void swapar	KEYWORD2
+
+
+######################################
+# Constants (LITERAL1)
+######################################
