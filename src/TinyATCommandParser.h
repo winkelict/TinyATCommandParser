@@ -38,7 +38,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //#define AT_RESPONSE_ALLOWCOPY
 
 //please adjust to your needs to minimize memory usage, current value based on max international phone nr and mac address length
-#define AT_RESPONSE_MAX_FILTERLIST_STRINGLENGTH 16+1
+#define AT_RESPONSE_MAX_FILTERLIST_STRINGLENGTH (16+1)
 
 //initial delimiter to be tried
 //example: +CMGL:
