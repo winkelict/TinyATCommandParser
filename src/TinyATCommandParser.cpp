@@ -148,7 +148,7 @@ unsigned int TinyATCommandParser::parse(char* response, char* atcommand, int pos
 			bool commandfound = false;
 
 			//no space can be behind the at command before the delim!
-			if (strlen(reponseatcommand) > 0 && strcmp(reponseatcommand, atcommand) == 0) {
+			if (strlen(reponseatcommand) > 0 && (strcmp(reponseatcommand, atcommand) == 0 || (strcmp(AT_RESPONSE_ANYCOMMAND, atcommand) == 0) )) {
 				delim = AT_RESPONSE_COMMANDEND_DELIM1;
 				commandfound = true;
 			} else {
@@ -157,11 +157,12 @@ unsigned int TinyATCommandParser::parse(char* response, char* atcommand, int pos
 				reponseatcommand = split(responselinenoatprefix, AT_RESPONSE_COMMANDEND_DELIM2, 0);
 
 				//no space can be behind the at command before the delim!
-				if (strlen(reponseatcommand) > 0 && strcmp(reponseatcommand, atcommand) == 0) {
+				if (strlen(reponseatcommand) > 0 && (strcmp(reponseatcommand, atcommand) == 0 || (strcmp(AT_RESPONSE_ANYCOMMAND, atcommand) == 0) )) {
 					delim = AT_RESPONSE_COMMANDEND_DELIM2;
 					commandfound = true;
 				}
 			}
+
 			//not allowed to delete stuff from stack delete[] reponseatcommand; //not needed anymore
 			if (!commandfound)
 				continue;

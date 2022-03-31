@@ -33,6 +33,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //this ensures that functins are called with the right parameter combinations, comment out to save flash memory
 #define TINYATCOMMANDPARSE_DEBUG_ASSERTIONS
 
+#define STRING(s) #s
+//as strings take up a lot of space, using a wildcard can save ram memory
+#define AT_RESPONSE_ANYCOMMAND STRING(*)
+
 //For testing purposes only: will copy complete input text! Allows for parsing same text multiple times for testing.
 //#define AT_RESPONSE_COPY
 //#define AT_RESPONSE_ALLOWCOPY
