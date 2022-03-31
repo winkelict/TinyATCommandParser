@@ -140,6 +140,7 @@ unsigned int TinyATCommandParser::parse(char* response, char* atcommand, int pos
 		if (responseline[0] ==  AT_RESPONSE_COMMANDSTART_DELIM) {
 			//found a command, get pointer to past the + symbol=where command starts
 			responselinenoatprefix = responseline + 1;
+			int noprefixlen = strlen(responselinenoatprefix);
 
 			char* reponseatcommand = NULL;
 			reponseatcommand = split(responselinenoatprefix, AT_RESPONSE_COMMANDEND_DELIM1, 0);
@@ -148,16 +149,15 @@ unsigned int TinyATCommandParser::parse(char* response, char* atcommand, int pos
 			bool commandfound = false;
 
 			//no space can be behind the at command before the delim!
-			if (strlen(reponseatcommand) > 0 && (strcmp(reponseatcommand, atcommand) == 0 || (strcmp(AT_RESPONSE_ANYCOMMAND, atcommand) == 0) )) {
+			if (strlen(reponseatcommand) != noprefixlen && (strcmp(reponseatcommand, atcommand) == 0 || (strcmp(AT_RESPONSE_ANYCOMMAND, atcommand) == 0) )) {
 				delim = AT_RESPONSE_COMMANDEND_DELIM1;
 				commandfound = true;
 			} else {
 				//try the other seperator
 				//TODO: can use same char array?
 				reponseatcommand = split(responselinenoatprefix, AT_RESPONSE_COMMANDEND_DELIM2, 0);
-
 				//no space can be behind the at command before the delim!
-				if (strlen(reponseatcommand) > 0 && (strcmp(reponseatcommand, atcommand) == 0 || (strcmp(AT_RESPONSE_ANYCOMMAND, atcommand) == 0) )) {
+				if (strlen(reponseatcommand) != noprefixlen && (strcmp(reponseatcommand, atcommand) == 0 || (strcmp(AT_RESPONSE_ANYCOMMAND, atcommand) == 0) )) {
 					delim = AT_RESPONSE_COMMANDEND_DELIM2;
 					commandfound = true;
 				}
@@ -168,7 +168,7 @@ unsigned int TinyATCommandParser::parse(char* response, char* atcommand, int pos
 				continue;
 
 			//move pointer to the right
-			char* atresult = responselinenoatprefix + strlen(atcommand) + strlen(delim);
+			char* atresult = responselinenoatprefix + strlen(reponseatcommand) + strlen(delim);
 
 			//Serial.print(atresult);
 			//RETURN VALUE                      : bool f(char* response, char* atcommand, int pos, char** retvalue, bool firstMatch) {
