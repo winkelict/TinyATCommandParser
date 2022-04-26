@@ -27,6 +27,21 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 TinyATCommandParser ATParse;
 
+bool TinyATCommandParser::equals(char *response, char *isvalue, int pos) {
+	char* value;
+	bool ok= ATParse.getResponseValue(response, AT_RESPONSE_ANYCOMMAND, pos, &value, false);
+
+	return ok && (strcmp(value,isvalue)==0);
+}
+
+bool TinyATCommandParser::any(char *response, int pos) {
+	char* value;
+	bool ok= ATParse.getResponseValue(response, AT_RESPONSE_ANYCOMMAND, pos, &value, false);
+
+	return ok && (strlen(trim(value)) > 0);
+}
+
+
 unsigned int TinyATCommandParser::getResponseValue(char* response, char* atcommand, int pos, char** returnvalue, bool firstMatch, int optFilterListPos, char (*optFilterList)[AT_RESPONSE_MAX_FILTERLIST_STRINGLENGTH], byte optFilterListLen, int optFilterPos, char* optFilter, bool optFilterCaseSensitive) {
 	return parse(response, atcommand, pos, returnvalue, firstMatch, NULL		, optFilterListPos, optFilterList, optFilterListLen			, optFilterPos, optFilter, optFilterCaseSensitive);
 }
@@ -122,7 +137,7 @@ unsigned int TinyATCommandParser::parse(char* response, char* atcommand, int pos
 		i++; //one-up response line nr
 
 		//always will be a CRLF if there is any command result, so this is k
-		if (!strlen(responseline)) //nothing seperated by CRLF meands no command result, also no CRU result etc.
+		if (responseline == NULL || !strlen(responseline)) //nothing seperated by CRLF meands no command result, also no CRU result etc.
 		{
 			//delete[] responseline;
 			continue; //TODO: set match and return value
@@ -384,7 +399,7 @@ char* TinyATCommandParser::strtok_r_strdelim(char *input, char *delimiter, char 
 
 	if (end == NULL) { //if no end found
 		char *temp = *save_ptr; //then complete string is the result
-		*save_ptr = NULL; //free memory??
+		*save_ptr = NULL;
 		return temp;
 	}
 

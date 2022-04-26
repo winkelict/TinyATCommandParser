@@ -31,7 +31,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <limits.h>
 
 //this ensures that functins are called with the right parameter combinations, comment out to save flash memory
-#define TINYATCOMMANDPARSE_DEBUG_ASSERTIONS
+//#define TINYATCOMMANDPARSE_DEBUG_ASSERTIONS
 
 #define STRING(s) #s
 //as strings take up a lot of space, using a wildcard can save ram memory
@@ -42,7 +42,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //#define AT_RESPONSE_ALLOWCOPY
 
 //please adjust to your needs to minimize memory usage, current value based on max international phone nr and mac address length
-#define AT_RESPONSE_MAX_FILTERLIST_STRINGLENGTH (16+1)
+#define AT_RESPONSE_MAX_FILTERLIST_STRINGLENGTH (20+1)
 
 //initial delimiter to be tried
 //example: +CMGL:
@@ -78,6 +78,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TinyATCommandParser {
 public:
+	//easy functions for use with TinyATCommandExecutor
+	static bool equals(char* response, char* value,int pos=0);
+	static bool any(char* response,int pos);
 
 	/*
 	 * defaults (changable using macro definitions in .h file)
