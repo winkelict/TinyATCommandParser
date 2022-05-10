@@ -107,6 +107,29 @@ unsigned int TinyATCommandParser::parse(char* response, char* atcommand, int pos
 	//response line looks something like this:
 	//\r\n+CMGL: 1,\"REC UNREAD\",\"+85291234
 
+	//Done to speed up gsm communication: echo command mode can stay on
+	//when \r\r encoutnered before any \n, assume command was echo'd with trailing \r
+	//chosen to recognize this by this resulting in two \r\r's due to the \r\n appended
+	char prevchar=0;
+	for (int i=0;i<strlen(response);i++) {
+		//stop if we found an n, wont be found after this
+		if (response[i]=='\n')
+			break;
+		if (response[i]=='\r' && prevchar=='\r') {
+			//erase echo'd command before this, line one will be trimmed
+			/*if ((i-1)>0) {
+				Serial.println("REPLACED");
+				response[i-1] = '\r';
+				response[i]='\n';
+			}*/
+			for (int j=(i-2);j>=0;j--)
+				response[j] = ' ';
+			break;
+		}
+
+		prevchar=response[i];
+	}
+
 
 	//copy needs to be here or pointer (or stack version) is deleted when exiting the next scope {}
 	//char* copy;
@@ -147,6 +170,8 @@ unsigned int TinyATCommandParser::parse(char* response, char* atcommand, int pos
 		if (i == 1)
 			responseline = ltrim(responseline);
 
+		Serial.println(responseline);
+
 		//response line can be anything still, get the part after the +
 		char* responselinenoatprefix = NULL;
 
@@ -185,7 +210,6 @@ unsigned int TinyATCommandParser::parse(char* response, char* atcommand, int pos
 			//move pointer to the right
 			char* atresult = responselinenoatprefix + strlen(reponseatcommand) + strlen(delim);
 
-			//Serial.print(atresult);
 			//RETURN VALUE                      : bool f(char* response, char* atcommand, int pos, char** retvalue, bool firstMatch) {
 			//RETURN IFMATCHFILTER (FIRST/LAST) : bool f(char* response, char* atcommand, int pos,                 bool firstMatch, char* filter) {
 			//OPTIONAL, IF MATCHES ANY IN LIST AT POS                                                                                             int optFilterListPos, char* optFilterList,
