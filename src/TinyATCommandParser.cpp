@@ -170,8 +170,6 @@ unsigned int TinyATCommandParser::parse(char* response, char* atcommand, int pos
 		if (i == 1)
 			responseline = ltrim(responseline);
 
-		Serial.println(responseline);
-
 		//response line can be anything still, get the part after the +
 		char* responselinenoatprefix = NULL;
 
